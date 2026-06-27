@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instalar GhostAssist</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background: #1a1a2e;
+      border: 1px solid rgba(79, 70, 229, 0.3);
+      border-radius: 16px;
+      padding: 48px;
+      max-width: 560px;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 40px;
+    }
+
+    .steps { display: flex; flex-direction: column; gap: 24px; }
+
+    .step { display: flex; gap: 16px; align-items: flex-start; }
+
+    .step-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #4f46e5;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .step-content a {
+      color: #818cf8;
+      text-decoration: none;
+    }
+    .step-content a:hover { text-decoration: underline; }
+
+    .chip-selector {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(79, 70, 229, 0.4);
+      background: transparent;
+      color: #94a3b8;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chip-btn:hover, .chip-btn.active {
+      background: #4f46e5;
+      border-color: #4f46e5;
+      color: #fff;
+    }
+
+    .download-btn {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .download-btn:hover { background: #4338ca; }
+    .download-btn.visible { display: inline-block; }
+
+    .code-block {
+      margin-top: 10px;
+      background: #0f0f1a;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 13px;
+      color: #a5f3fc;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .copy-hint {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: #475569;
+      font-family: -apple-system, sans-serif;
+    }
+
+    .copied-toast {
+      display: none;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: #34d399;
+      font-family: -apple-system, sans-serif;
+    }
+
+    .warning {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 8px;
+      font-size: 12px;
+      color: #fbbf24;
+      line-height: 1.6;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.05);
+      margin: 32px 0;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: #334155;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">👻</div>
+    <h1>Instalar GhostAssist</h1>
+    <p class="subtitle">Overlay invisível para entrevistas técnicas</p>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Qual é o seu Mac?</h3>
+          <p>Clique na maçã () → <strong>Sobre este Mac</strong> → veja o chip.</p>
+          <div class="chip-selector">
+            <button class="chip-btn" onclick="selectChip('arm64')">Apple Silicon (M1/M2/M3/M4)</button>
+            <button class="chip-btn" onclick="selectChip('x64')">Intel</button>
+          </div>
+          <a id="download-btn" class="download-btn" href="#" target="_blank">⬇ Baixar GhostAssist</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Instale o app</h3>
+          <p>Abra o <code>.dmg</code> baixado e arraste o <strong>GhostAssist</strong> para a pasta <strong>Applications</strong>.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Libere o app no macOS</h3>
+          <p>Abra o <strong>Terminal</strong> e rode o comando abaixo — isso é necessário uma única vez:</p>
+          <div class="code-block" onclick="copyCommand(this)">
+            xattr -cr /Applications/GhostAssist.app
+            <span class="copy-hint">clique para copiar</span>
+            <span class="copied-toast">✓ copiado</span>
+          </div>
+          <div class="warning">
+            ⚠️ O macOS bloqueia apps sem assinatura Apple com a mensagem "está danificado". Este comando remove o bloqueio — é seguro.
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Abra o GhostAssist</h3>
+          <p>Clique duas vezes em <strong>GhostAssist.app</strong> em Applications. O app aparece como um overlay invisível — sem ícone no Dock.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+    <p class="footer">GhostAssist avisa automaticamente quando há uma nova versão disponível.</p>
+  </div>
+
+  <script>
+    const RELEASES_BASE = 'https://github.com/igor-oc-diniz/ghost-assist-releases/releases/latest/download'
+
+    function selectChip(arch) {
+      document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'))
+      event.target.classList.add('active')
+
+      const btn = document.getElementById('download-btn')
+      const label = arch === 'arm64' ? 'mac-arm64' : 'mac-x64'
+      btn.href = `${RELEASES_BASE}/GhostAssist-latest-${label}.dmg`
+      btn.classList.add('visible')
+    }
+
+    function copyCommand(el) {
+      const cmd = 'xattr -cr /Applications/GhostAssist.app'
+      navigator.clipboard.writeText(cmd).then(() => {
+        el.querySelector('.copy-hint').style.display = 'none'
+        const toast = el.querySelector('.copied-toast')
+        toast.style.display = 'block'
+        setTimeout(() => {
+          toast.style.display = 'none'
+          el.querySelector('.copy-hint').style.display = 'block'
+        }, 2000)
+      })
+    }
+  </script>
+</body>
+</html>
